@@ -15,3 +15,5 @@ toilet-iso
 toiletv2*
 toiletv3-*
 *.stl
+*.emesh
+extendedFeatureEdgeMesh
