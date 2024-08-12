@@ -1,0 +1,23 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvOptions;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+velocityDampingConstraint1
+{
+    selectionMode    all;
+
+    // Mandatory entries (unmodifiable)
+    type            velocityDampingConstraint;
+
+    // Mandatory entries (runtime modifiable)
+    UMax            5;
+
+    // Optional entries (runtime modifiable)
+    UNames          (U);
+}
