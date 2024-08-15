@@ -6,7 +6,6 @@ Anim
 *.pvsm
 *.mp4
 *.mov
-*.sh
 *.jpg
 polyMesh
 processor*
