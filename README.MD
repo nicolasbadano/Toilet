@@ -9,7 +9,7 @@ This repository contains the implementation of an OpenFOAM model for the case of
 
 ## Results
 
-[![Watch the video](https://img.youtube.com/vi/G0e4hFOgAqk/maxresdefault.jpg)](https://youtu.be/G0e4hFOgAqk)
+![crab pet](https://i.imgur.com/Dh250mG.gif)
 
 ## License
 

@@ -15,7 +15,7 @@ FoamFile
 }
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-application     interMixingFoam;
+application     interIsoFoam;
 
 startFrom       latestTime;
 
@@ -52,122 +52,8 @@ maxAlphaCo      0.5;
 
 maxDeltaT       0.001;
 
-libs            ();
 
-functions
-{
-    sTransport
-    {
-        type            scalarTransport;
-        libs            (solverFunctionObjects);
 
-        enabled         true;
-        writeControl    outputTime;
-        writeInterval   1;
 
-        field           s;
-        bounded01       true;
-        phase           none;
-
-        write           true;
-
-        fvOptions
-        {
-        }
-
-        resetOnStartUp  false;
-    }
-
-    surfaceSampling
-    {
-        type            surfaces;
-        libs            (sampling);
-        writeControl    runTime;
-        writeInterval   0.01;
-
-        interpolationScheme cellPointWallModified;
-
-        surfaceFormat ensight;
-
-        formatOptions
-        {
-            vtp
-            {
-                format binary;
-            }
-        }
-
-        // Fields to be sampled
-        fields
-        (
-            U
-            k
-            omega
-            nut
-            alpha.water
-            alpha.air
-            p_rgh
-            rho
-            p
-            s
-        );
-
-        surfaces
-        {
-            freeSurface
-            {
-                type            isoSurface;
-                isoField        alpha.air;
-                isoValue        0.5;
-                interpolate     true;
-            }
-            yNormalPlus000
-            {
-                type            patch;
-                patches         (symmetry);
-                interpolate     true;
-                triangulate     false;
-            }
-            walls
-            {
-                type            patch;
-                patches         (fixedWalls fixedWalls2);
-                interpolate     true;
-                triangulate     false;
-            }
-            zNormalMinus004
-            {
-                type        cuttingPlane;
-                planeType   pointAndNormal;
-                pointAndNormalDict {
-                    point       (0 0 -0.04);
-                    normal      (0 0 1);
-                }
-                interpolate true;
-            }
-        }
-    }
-
-    fieldMinMax1
-    {
-        type        fieldMinMax;
-        libs        (fieldFunctionObjects);
-
-        mode        magnitude;
-        fields      (U);
-    }
-
-    yPlus1
-    {
-        // Mandatory entries (unmodifiable)
-        type            yPlus;
-        libs            (fieldFunctionObjects);
-
-        executeControl  timeStep;
-        executeInterval 1;
-        writeControl    writeTime;
-        writeInterval   1;
-    }
-}
 
 // ************************************************************************* //
